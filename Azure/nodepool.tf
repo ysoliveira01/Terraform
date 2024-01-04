@@ -1,5 +1,5 @@
 resource "azurerm_kubernetes_cluster_node_pool" "apps" {
-  availability_zones    = [1, 2, 3]
+  zones                 = [1, 2, 3]
   enable_auto_scaling   = true
   kubernetes_cluster_id = azurerm_kubernetes_cluster.demo.name
   max_count             = var.max_count
@@ -26,7 +26,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "apps" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "services" {
-  availability_zones    = [1, 2, 3]
+  zones                 = [1, 2, 3]
   enable_auto_scaling   = true
   kubernetes_cluster_id = azurerm_kubernetes_cluster.demo.name
   max_count             = var.max_count

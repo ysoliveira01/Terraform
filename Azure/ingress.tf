@@ -1,5 +1,5 @@
 resource "kubectl_manifest" "nginx" {
-    yaml_body = <<YAML
+  yaml_body = <<YAML
 apiVersion: v1
 kind: Namespace
 metadata:

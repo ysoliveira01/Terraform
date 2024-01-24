@@ -10,23 +10,26 @@ resource "azurerm_kubernetes_cluster" "lab" {
   dns_prefix              = "exampleaks1"
   private_cluster_enabled = true
 
-  # role_based_access_control {
-  #   enabled = true
-
-  #   azure_active_directory {
-  #     managed = true
-  #     azure_rbac_enable = true
-  #   }
-  # }
+  azure_active_directory_role_based_access_control {
+    managed = true
+    azure_rbac_enabled = true
+  }
 
   default_node_pool {
     name       = "worker"
     node_count = 1
     vm_size    = var.vm_size
+    vnet_subnet_id = var.gateway_subnet
   }
 
-  identity {
-    type = "SystemAssigned"
+  service_principal {
+    client_id     = ""
+    client_secret = ""
+  }
+
+  ingress_application_gateway {
+    gateway_name = ""
+    subnet_id = var.gateway_subnet
   }
 
   tags = {
@@ -37,25 +40,10 @@ resource "azurerm_kubernetes_cluster" "lab" {
     Squad       = var.Squad
   }
 
-  # service_principal {
-  #   client_id     = ""
-  #   client_secret = ""
-  # }
-
-  # addon_profile {
-  #   oms_agent {
-  #     enabled                    = true
-  #     log_analytics_workspace_id = true
-  #   }
-  # }
-
   network_profile {
     load_balancer_sku  = "standard"
     network_plugin     = "kubenet"
     network_policy     = "calico"
-    docker_bridge_cidr = "172.17.0.1/16"
-    service_cidr       = "192.168.0.0/16"
-    dns_service_ip     = "192.168.0.10"
   }
 
   lifecycle {

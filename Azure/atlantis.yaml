@@ -1,0 +1,7 @@
+version: 3
+projects:
+- dir: .
+  workflow:
+  workspace:
+  autoplan:
+    enabled: true

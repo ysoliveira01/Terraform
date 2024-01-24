@@ -14,7 +14,7 @@ variable "CR" {
 }
 
 variable "region" {
-  description = "location selecionado"
+  description = "região selecionada"
   default     = "eastus"
 }
 
@@ -57,4 +57,8 @@ variable "os_type" {
 
 variable "priority" {
   default = "Regular"
+}
+
+variable "gateway_subnet" {
+  default = ""
 }

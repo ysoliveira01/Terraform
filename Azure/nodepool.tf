@@ -6,16 +6,14 @@ resource "azurerm_kubernetes_cluster_node_pool" "apps" {
   min_count             = var.min_count
   mode                  = var.mode
   name                  = "apps"
-  #  orchestrator_version  = data.azurerm_kubernetes_service_versions.current.latest_version
   os_disk_size_gb = var.os_disk_size_gb
   os_type         = var.os_type
   vm_size         = var.vm_size
   priority        = var.priority
+  vnet_subnet_id = var.gateway_subnet
+  enable_host_encryption = false
   node_labels = {
-    "nodepool-type" = "user"
-    "environment"   = var.environment
-    "nodepools"     = var.nodepools
-    "apps"          = "apps"
+    "nodepool" = "apps"
   }
   tags = {
     "nodepool-type" = "user"
@@ -38,11 +36,10 @@ resource "azurerm_kubernetes_cluster_node_pool" "services" {
   os_type         = var.os_type
   vm_size         = var.vm_size
   priority        = var.priority
+  vnet_subnet_id = var.gateway_subnet
+  enable_host_encryption = false
   node_labels = {
-    "nodepool-type" = "user"
-    "environment"   = var.environment
-    "nodepools"     = var.nodepools
-    "services"      = "services"
+    "nodepool" = "services"
   }
   tags = {
     "nodepool-type" = "user"

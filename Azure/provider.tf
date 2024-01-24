@@ -17,16 +17,12 @@ terraform {
   }
 }
 
-provider "kubernetes" {
-  config_path = "~/.kube/config"
-
-}
-
 provider "azurerm" {
   features {}
   #client_id       = ""
   #client_secret   = ""
   #subscription_id = ""
+  #tenant_id = ""
 }
 
 terraform {

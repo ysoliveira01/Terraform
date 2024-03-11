@@ -89,7 +89,7 @@ slack:
   channel: "#alertas-kubewatch"
   ## Create using: https://my.slack.com/services/new/bot and invite the bot to your channel using: /join @botname
   ##
-  token: "xoxb-6776156708533-6778772815285-QYkp65TSWexAKLYukqagss5M"
+  token: ""
 ## @param slackwebhook.enabled Enable SlackWebhook notifications
 ## @param slackwebhook.channel Slack channel to notify
 ## @param slackwebhook.username Slack username

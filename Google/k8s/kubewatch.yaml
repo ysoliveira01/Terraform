@@ -86,10 +86,10 @@ hostAliases: []
 ##
 slack:
   enabled: true
-  channel: "#alertas-kubewatch"
+  channel: "#alinhamento"
   ## Create using: https://my.slack.com/services/new/bot and invite the bot to your channel using: /join @botname
   ##
-  token: ""
+  token: "xoxb-6776156708533-6811437788000-NVXWG0mIGbKL2NTjv72tAlWe"
 ## @param slackwebhook.enabled Enable SlackWebhook notifications
 ## @param slackwebhook.channel Slack channel to notify
 ## @param slackwebhook.username Slack username
@@ -98,7 +98,7 @@ slack:
 ##
 slackwebhook:
   enabled: true
-  channel: "XXXX"
+  channel: "#alinhamento"
   username: ""
   emoji: ""
   slackwebhookurl: "XXXX"
@@ -187,21 +187,48 @@ extraHandlers: {}
 
 ## @param namespaceToWatch Namespace to watch, leave it empty for watching all
 ##
-namespaceToWatch: "default"
-rbac:
-  create: true
+namespaceToWatch: ""
 resourcesToWatch:
-  deployment: true
+  deployment: false
   replicationcontroller: false
   replicaset: false
   daemonset: false
-  services: true
+  services: false
   pod: true
   job: false
   persistentvolume: false
   event: true
 ## @param command Override default container command (useful when using custom images)
 ##
+
+  extraDeploy:
+  filterScript:
+    enabled: true  # Habilita o uso do script de filtragem
+    path: "10.85.91.183:80"  #         Caminho para o script de filtragem
+
+# Opção 1 de filtro
+#filter:
+#  eventFilter: "type in ('Warning', 'Error')"
+
+# opção 2 de filtro
+#filter:
+#  eventReason:
+#    include:
+#      - Warning
+#      - Error
+
+# opção 3 de filtro
+#event:
+#    global:
+#     - pod
+#     - deployment
+#    create:
+#     - service
+#    update:
+#     - 
+#    delete:
+#     - service
+
 command: []
 ## @param args Override default container args (useful when using custom images)
 ##
@@ -428,7 +455,8 @@ sidecars: []
 
 ## @param rbac.create Whether to create & use RBAC resources or not
 ##
-
+rbac:
+  create: true
 ## Pods Service Account
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 ## @param serviceAccount.create Specifies whether a ServiceAccount should be created

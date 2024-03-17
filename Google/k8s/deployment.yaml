@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubewatch-intermediary
+  namespace: kubewatch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubewatch-intermediary
+  template:
+    metadata:
+      labels:
+        app: kubewatch-intermediary
+    spec:
+      containers:
+      - name: intermediary
+        image: gcr.io/civic-replica-408912/kubewatch:v03  
+        ports:
+        - containerPort: 8080
